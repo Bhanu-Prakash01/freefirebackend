@@ -2,12 +2,12 @@ const express=require('express')
 const router=express.Router()
 const Razorpay=require('razorpay')
 const request=require('request');
-
+require('dotenv').config()
 const keys=require('./keys')
 
 const razorInstance = new Razorpay({
-    key_id:keys.razorIdkey,
-    key_secret:keys.razorIdSecret
+    key_id: process.env.RAZORID,
+    key_secret: process.env.RAZORSECRET
 })
 
 router.get('/order',(req,res)=>{
