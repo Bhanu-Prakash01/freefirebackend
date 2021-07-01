@@ -14,7 +14,7 @@ router.post('/post', async (req,res)=>{
     try{
         const coursedata= await course.save();
         res.status(201).send(coursedata)
-    }catch(err){
+    }catch(err){ 
         console.log(err)
     }
 })
