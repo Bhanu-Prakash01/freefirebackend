@@ -7,11 +7,11 @@ require('dotenv').config();
 const userroute=require('./routes/users');  
 const matchsroute=require('./routes/matchs');
 
-mongoose.connect('mongodb+srv://free:free@cluster0.m1ywv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{ useUnifiedTopology: true , useNewUrlParser: true  }).then(()=>console.log('db is connected ')).catch((err)=>console.log(`db is failed ${err}`))
+mongoose.connect(process.env.MONGODB,{ useUnifiedTopology: true , useNewUrlParser: true  }).then(()=>console.log('db is connected ')).catch((err)=>console.log(`db is failed ${err}`))
 
 //middleware
 app.use(express.json());
-app.use(helmet());
+app.use(helmet()); 
 var cors = require('cors');
 app.use(cors()); 
 app.use('/api/user',userroute)
@@ -21,6 +21,7 @@ app.get('/',(req,res)=>{
     res.send('app is running')
 })
 
-app.listen(8000,()=>{
-    console.log('server running on port number 8000' )
+const port =process.env.PORT 
+app.listen(port,()=>{
+    console.log(`server running on port number ${process.env.PORT}` )
 })
